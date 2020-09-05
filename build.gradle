@@ -25,7 +25,7 @@ dependencies {
 	}
 }
 
-group = 'com.example'
+group = 'wtf.kaan'
 version = '1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 

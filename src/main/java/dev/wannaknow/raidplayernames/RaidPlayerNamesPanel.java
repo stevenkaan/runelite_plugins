@@ -17,10 +17,6 @@ public class RaidPlayerNamesPanel extends PluginPanel {
     RaidPlayerNamesPanel(RaidPlayerNamesPlugin plugin) {
         getParent().setLayout(new BorderLayout());
         getParent().add(this, BorderLayout.NORTH);
-
-        addRaid(Arrays.asList("Test"));
-        addRaid(Arrays.asList("Test"));
-
     }
 
     public void addRaid(List<String> people) {

@@ -2,7 +2,6 @@ package dev.wannaknow.raidplayernames;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
-import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.callback.ClientThread;
@@ -72,6 +71,8 @@ public class RaidPlayerNamesPlugin extends Plugin {
 	@Override
 	protected void shutDown() throws Exception {
 		inRaidChambers = false;
+
+		clientToolbar.removeNavigation(navigationButton);
 	}
 
 	@Subscribe

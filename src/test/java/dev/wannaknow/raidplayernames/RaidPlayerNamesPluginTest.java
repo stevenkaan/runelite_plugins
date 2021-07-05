@@ -1,4 +1,4 @@
-package wtf.kaan.raidplayernames;
+package dev.wannaknow.raidplayernames;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;

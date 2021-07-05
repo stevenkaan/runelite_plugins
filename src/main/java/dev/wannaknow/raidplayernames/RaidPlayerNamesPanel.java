@@ -1,10 +1,11 @@
-package wtf.kaan.raidplayernames;
+package dev.wannaknow.raidplayernames;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.ui.PluginPanel;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -15,11 +16,14 @@ public class RaidPlayerNamesPanel extends PluginPanel {
 
     RaidPlayerNamesPanel(RaidPlayerNamesPlugin plugin) {
         getParent().setLayout(new BorderLayout());
-        getParent().add(this, BorderLayout.CENTER);
+        getParent().add(this, BorderLayout.NORTH);
+
+        addRaid(Arrays.asList("Test"));
+        addRaid(Arrays.asList("Test"));
 
     }
 
-    public void addPanel(List<String> people) {
+    public void addRaid(List<String> people) {
         if(people.size() > 1) {
             add(new RaidPlayerNamesBox(this, people));
             validate();
@@ -27,4 +31,9 @@ public class RaidPlayerNamesPanel extends PluginPanel {
         }
     }
 
+    public void deleteRaid(RaidPlayerNamesBox box) {
+        remove(box);
+        validate();
+        repaint();
+    }
 }

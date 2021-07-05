@@ -1,4 +1,4 @@
-package wtf.kaan.raidplayernames;
+package dev.wannaknow.raidplayernames;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -81,18 +81,6 @@ public class RaidPlayerNamesPlugin extends Plugin {
 	}
 
 	@Subscribe
-	public void onActorDeath(ActorDeath actorDeath) {
-
-		if (inRaidChambers) {
-			Actor actor = actorDeath.getActor();
-			if (actor instanceof Player) {
-				Player player = (Player) actor;
-
-			}
-		}
-	}
-
-	@Subscribe
 	public void onChatMessage(ChatMessage event) {
 		if (inRaidChambers && event.getType() == ChatMessageType.FRIENDSCHATNOTIFICATION) {
 			String message = Text.removeTags(event.getMessage());
@@ -104,7 +92,7 @@ public class RaidPlayerNamesPlugin extends Plugin {
 					log.info("Player in raid: " + player.getName());
 					people.add(player.getName());
 				}
-				SwingUtilities.invokeLater(() -> panel.addPanel(people));
+				SwingUtilities.invokeLater(() -> panel.addRaid(people));
 			}
 
 		}

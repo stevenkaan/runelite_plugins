@@ -1,6 +1,5 @@
 package dev.wannaknow.raidplayernames;
 
-import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.VarbitChanged;
@@ -9,8 +8,6 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.raids.RaidRoom;
-import net.runelite.client.plugins.raids.solver.Room;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.util.ImageUtil;
@@ -21,16 +18,13 @@ import javax.inject.Inject;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @PluginDescriptor(
 		name = "Raid Player Names",
 		description = "A plugin which automaticlly saves all the names with the people you raid with",
 		tags = {"combat", "raid", "pve", "pvm", "bosses", "cox", "tob", "names", "log"}
 )
-@Slf4j
 public class RaidPlayerNamesPlugin extends Plugin {
 
 	private static final String PLUGIN_NAME = "Raid name logger";
@@ -98,11 +92,8 @@ public class RaidPlayerNamesPlugin extends Plugin {
 				SwingUtilities.invokeLater(() -> panel.addRaid("CoX", people));
 			}
 		} else if (event.getType() == ChatMessageType.GAMEMESSAGE && m.startsWith(TOB_START)) {
-			log.info("tob started");
-
 			Widget raidingPartyWidget = client.getWidget(PARTY_LIST_ID_TOB);
 			if (raidingPartyWidget == null) {
-				log.info("widget = null");
 				return;
 			}
 

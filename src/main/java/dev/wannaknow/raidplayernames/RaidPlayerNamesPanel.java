@@ -3,6 +3,7 @@ package dev.wannaknow.raidplayernames;
 import net.runelite.client.ui.PluginPanel;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class RaidPlayerNamesPanel extends PluginPanel {
@@ -12,9 +13,9 @@ public class RaidPlayerNamesPanel extends PluginPanel {
         getParent().add(this, BorderLayout.NORTH);
     }
 
-    public void addRaid(List<String> people) {
+    public void addRaid(String type, List<String> people) {
         if(people.size() > 1) {
-            add(new RaidPlayerNamesBox(this, people));
+            add(new RaidPlayerNamesBox(this, type, people));
             validate();
             repaint();
         }

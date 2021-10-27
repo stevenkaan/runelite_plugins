@@ -27,7 +27,7 @@ public class RaidPlayerNamesBox extends JPanel {
         DELETE_HOVER_ICON = new ImageIcon(ImageUtil.alphaOffset(deleteImg, -100));
     }
 
-    RaidPlayerNamesBox(RaidPlayerNamesPanel panel, List<String> players) {
+    RaidPlayerNamesBox(RaidPlayerNamesPanel panel, String type, List<String> players) {
 
         this.panel = panel;
         setLayout(new BorderLayout());
@@ -68,7 +68,10 @@ public class RaidPlayerNamesBox extends JPanel {
                 deleteLabel.setIcon(DELETE_ICON);
             }
         });
-        actions.add(deleteLabel);
+        actions.add(new JLabel(type), BorderLayout.WEST);
+        actions.add(Box.createHorizontalGlue());
+        actions.add(Box.createRigidArea(new Dimension(5, 0)));
+        actions.add(deleteLabel, BorderLayout.EAST);
 
         add(actions, BorderLayout.NORTH);
 

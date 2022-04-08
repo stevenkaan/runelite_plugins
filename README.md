@@ -1,0 +1,1 @@
+# All plugins from SoloWanna

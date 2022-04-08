@@ -1,2 +1,2 @@
-# Example
-An example greeter plugin
+# AutoKick
+Auto kicks people onJoin in the friendschat

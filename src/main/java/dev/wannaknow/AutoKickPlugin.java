@@ -3,25 +3,19 @@ package dev.wannaknow;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 
-import com.sun.org.slf4j.internal.Logger;
-import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.events.FriendsChatMemberJoined;
-import net.runelite.api.events.GameStateChanged;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import sun.nio.ch.IOStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
-@Slf4j
 @PluginDescriptor(
 	name = "Auto Kick",
 	description = "Auto kick players from friends chat",

@@ -5,13 +5,10 @@ import javax.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
-import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.FriendsChatMemberJoined;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 
@@ -20,7 +17,6 @@ import net.runelite.client.plugins.raids.RaidRoom;
 import net.runelite.client.plugins.raids.RoomType;
 import net.runelite.client.plugins.raids.events.RaidScouted;
 import net.runelite.client.plugins.raids.solver.Room;
-import net.runelite.client.util.Text;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,7 +24,6 @@ import okhttp3.RequestBody;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static net.runelite.http.api.RuneLiteAPI.GSON;
 
@@ -59,12 +54,12 @@ public class CoxScoutDiscordPlugin extends Plugin
 	private Raid raid;
 
 	@Override
-	protected void startUp() throws Exception
+	protected void startUp()
 	{
 	}
 
 	@Override
-	protected void shutDown() throws Exception
+	protected void shutDown()
 	{
 		inRaidChambers = false;
 	}
@@ -82,7 +77,7 @@ public class CoxScoutDiscordPlugin extends Plugin
 			return;
 		}
 
-		boolean setting = client.getVar(Varbits.IN_RAID) == 1;
+		boolean setting = client.getVarbitValue(Varbits.IN_RAID) == 1;
 
 		if (inRaidChambers != setting) {
 			inRaidChambers = setting;
@@ -90,20 +85,10 @@ public class CoxScoutDiscordPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onChatMessage(ChatMessage event) {
-		String m = Text.removeTags(event.getMessage());
-		if (inRaidChambers && event.getType() == ChatMessageType.FRIENDSCHATNOTIFICATION) {
-
-			if (m.startsWith(RAID_START_MESSAGE)) {
-			}
-		}
-	}
-
-	@Subscribe
 	public void onRaidScouted(RaidScouted raidScouted)
 	{
 		this.raid = raidScouted.getRaid();
-		if(raidScouted.isFirstScout() == false) {
+		if(!raidScouted.isFirstScout()) {
 			sendWebhook();
 		}
 	}
@@ -185,13 +170,9 @@ public class CoxScoutDiscordPlugin extends Plugin
 		RequestBody requestBody = new MultipartBody.Builder()
 				.setType(MultipartBody.FORM)
 				.addFormDataPart("payload_json",  GSON.toJson(body))
-//				.addFormDataPart("image", URLEncoder.encode(fileName + ".png", "UTF-8"),
-//						RequestBody.create(MediaType.parse("image/*png"),
-//								screenshotOutput.toByteArray()))
 				.build();
 
 		Request request = new Request.Builder()
-//				.url("https://discord.com/api/webhooks/963858839193649222/2VBT2P1YZ4LKRhkLnccLc9rrdZpVTSSCcvRxmSZKdRMNskRHYp78m6oCPA72laoQmmWi")
 				.url(config.url())
 				.post(requestBody)
 				.build();

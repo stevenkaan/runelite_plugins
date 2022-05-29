@@ -145,6 +145,7 @@ public class ClanUsersPlugin extends Plugin
 	}
 
 	private void copyStringToClipboard(String copy) {
+		copy = copy.replaceAll("\\p{Zs}+", " ");
 		if(StringUtils.isBlank((copy))) {
 			panel.getCopiedNames().setText("No names found.");
 		} else {

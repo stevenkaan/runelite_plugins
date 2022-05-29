@@ -1,22 +1,25 @@
 package dev.wannaknow.clanusers;
 
-import net.runelite.client.ui.ColorScheme;
+import lombok.Getter;
 import net.runelite.client.ui.PluginPanel;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class ClanUsersPanel extends PluginPanel {
 
     private ClanUsersPlugin plugin;
 
+    @Getter
+    private JTextArea copiedNames;
+
     ClanUsersPanel(ClanUsersPlugin plugin) {
 
         getParent().setLayout(new BorderLayout());
         getParent().add(this, BorderLayout.NORTH);
 
-
+        copiedNames = new JTextArea();
+        copiedNames.setEditable(false);
 
         JButton rankedFCbutton = new JButton("Copy ranked FC usernames");
         rankedFCbutton.addActionListener(l -> {
@@ -54,5 +57,6 @@ public class ClanUsersPanel extends PluginPanel {
         add(onlineRankedCCbutton);
         add(allCCbutton);
         add(guestCCbutton);
+        add(copiedNames);
     }
 }

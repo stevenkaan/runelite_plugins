@@ -8,6 +8,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.util.ImageUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -67,6 +68,8 @@ public class ClanUsersPlugin extends Plugin
 				}
 			}
 			copyStringToClipboard(names);
+		} else {
+			panel.getCopiedNames().setText("Not in a FriendsChat.");
 		}
 	}
 
@@ -91,6 +94,8 @@ public class ClanUsersPlugin extends Plugin
 				names += member.getName() + "\n";
 			}
 			copyStringToClipboard(names);
+		}else {
+			panel.getCopiedNames().setText("Not in a ClanChat.");
 		}
 	}
 
@@ -106,6 +111,8 @@ public class ClanUsersPlugin extends Plugin
 				}
 			}
 			copyStringToClipboard(names);
+		}else {
+			panel.getCopiedNames().setText("Not in a ClanChat.");
 		}
 	}
 
@@ -118,6 +125,8 @@ public class ClanUsersPlugin extends Plugin
 				names += member.getName()+"\n";
 			}
 			copyStringToClipboard(names);
+		}else {
+			panel.getCopiedNames().setText("Not in a ClanChat.");
 		}
 	}
 
@@ -130,12 +139,19 @@ public class ClanUsersPlugin extends Plugin
 				names += member.getName()+"\n";
 			}
 			copyStringToClipboard(names);
+		}else {
+			panel.getCopiedNames().setText("Not in a ClanChat.");
 		}
 	}
 
 	private void copyStringToClipboard(String copy) {
-		StringSelection stringSelection = new StringSelection(copy);
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		clipboard.setContents(stringSelection, null);
+		if(StringUtils.isBlank((copy))) {
+			panel.getCopiedNames().setText("No names found.");
+		} else {
+			panel.getCopiedNames().setText(copy);
+			StringSelection stringSelection = new StringSelection(copy);
+			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			clipboard.setContents(stringSelection, null);
+		}
 	}
 }

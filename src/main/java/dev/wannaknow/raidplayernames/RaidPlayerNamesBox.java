@@ -68,7 +68,7 @@ public class RaidPlayerNamesBox extends JPanel {
                 deleteLabel.setIcon(DELETE_ICON);
             }
         });
-        actions.add(new JLabel(type), BorderLayout.WEST);
+        actions.add(new JLabel(type + " (" + players.size() + " players)"), BorderLayout.WEST);
         actions.add(Box.createHorizontalGlue());
         actions.add(Box.createRigidArea(new Dimension(5, 0)));
         actions.add(deleteLabel, BorderLayout.EAST);

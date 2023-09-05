@@ -114,7 +114,7 @@ public class RaidPlayerNamesPlugin extends Plugin {
 			return;
 		}
 
-		boolean setting = client.getVar(Varbits.IN_RAID) == 1;
+		boolean setting = client.getVarbitValue(Varbits.IN_RAID) == 1;
 
 		if (inRaidChambers != setting) {
 			inRaidChambers = setting;
